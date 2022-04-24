@@ -7,21 +7,21 @@ const props = defineProps<WorkCardProps>()
 </script>
 
 <template>
-  <div class="card">
+  <div class="work-card">
     <img
       class="bg"
       :src="imagekit(props.work.coverImageBackground)"
       :alt="props.work.title"
       sizes="700px"
     />
-    <div class="card-info">
+    <div class="work-card-info">
       <h3>{{ props.work.title }}</h3>
     </div>
   </div>
 </template>
 
 <style scoped>
-.card {
+.work-card {
   grid-column: 1 span;
   height: 400px;
   background-color: #0d1c29;
@@ -39,7 +39,7 @@ img.bg {
   height: 100%;
   object-fit: cover;
 }
-.card-info {
+.work-card-info {
   position: absolute;
   bottom: 0;
   background: rgba(255, 255, 255, 0.8);
@@ -53,10 +53,10 @@ img.bg {
   flex-direction: column;
   gap: 5px;
 }
-.card-info > * {
+.work-card-info > * {
   margin: 0;
 }
-.card-info > h3 {
+.work-card-info > h3 {
   text-align: left;
 }
 .tags {

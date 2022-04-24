@@ -2,9 +2,6 @@
 **/*.log
 */.nuxt
 */.output
-*/dist
-*/dist-ssr
-*/build
 **/.env
 **/.DS_Store
 **/.git*

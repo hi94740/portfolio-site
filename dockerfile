@@ -5,5 +5,5 @@ WORKDIR /app
 COPY . .
 RUN npm i --legacy-peer-deps
 RUN npm run build
-CMD npm start -w ${WORKSPACE}
+CMD npm start
 EXPOSE ${PORT}

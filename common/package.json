@@ -1,0 +1,11 @@
+{
+  "name": "common",
+  "private": true,
+  "main": "index.ts",
+  "dependencies": {
+    "imagekit-javascript": "^1.4.3"
+  },
+  "devDependencies": {
+    "@vue/runtime-dom": "^3.2.33"
+  }
+}

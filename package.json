@@ -1,0 +1,35 @@
+{
+  "name": "shenjiaweb-portfolio-site",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Jiawei's portfolio site",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier ./ -c && exit || echo '\nPress enter to format ALL' && read && prettier ./ -w",
+    "dev": "concurrently -n frontend,backend -c green,blue 'npm run dev -w frontend' 'npm run dev -w backend'",
+    "build": "concurrently -n frontend,backend -c green,blue 'npx nuxi build frontend' 'npm run build -w backend'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hi94740/portfolio-site.git"
+  },
+  "keywords": [
+    "portfolio"
+  ],
+  "author": "shenjiaweb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hi94740/portfolio-site/issues"
+  },
+  "homepage": "https://github.com/hi94740/portfolio-site#readme",
+  "workspaces": [
+    "common",
+    "frontend",
+    "backend",
+    "components"
+  ],
+  "devDependencies": {
+    "concurrently": "^7.1.0",
+    "prettier": "^2.6.2"
+  }
+}

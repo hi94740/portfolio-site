@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import imagekit from "common/imagekit"
 import { Work } from "backend/src/types/payload-generated-types"
-export interface WorkCardProps { work: Partial<Work> }
+export interface WorkCardProps {
+  work: Partial<Work>
+}
 
 const props = defineProps<WorkCardProps>()
 </script>

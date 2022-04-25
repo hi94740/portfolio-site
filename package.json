@@ -1,7 +1,8 @@
 {
   "name": "shenjiaweb-portfolio-site",
   "private": true,
-  "version": "0.0.0","engines": {
+  "version": "0.0.0",
+  "engines": {
     "node": "16.x",
     "npm": "8.x"
   },

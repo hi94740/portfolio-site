@@ -1,10 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
-const { data } = await useApi("works", {
-  params: { "where[slug][equals]=": route.params.slug }
-})
-if (data.value.docs.length === 0) navigateTo("/")
-const work = computed(() => data.value.docs[0])
+const works = inject(injectionKeys.works)
+const work = computed(() => works.find(w => w.slug === route.params.slug))
 </script>
 
 <template>

@@ -42,9 +42,7 @@ const testDot = (x: number, y: number) =>
       dot[0] + hDotCenter.value === x && dot[1] + vDotCenter.value === y
   )
 
-const { data, error } = await useApi("works")
-watchEffect(() => console.log(error.value))
-watchEffect(() => console.log(data.value))
+const works = inject(injectionKeys.works)
 </script>
 
 <template>
@@ -62,13 +60,13 @@ watchEffect(() => console.log(data.value))
         </div>
       </ClientOnly>
     </div>
-    <div class="row-container" v-for="r in Math.ceil(data.docs.length / 2)">
+    <div class="row-container" v-for="r in Math.ceil(works.length / 2)">
       <div class="row">
         <NuxtLink
-          v-for="c in 2 - (data.docs.length % 2)"
-          :to="'/works/' + data.docs[(r - 1) * 2 + c - 1].slug"
+          v-for="c in 2 - (works.length % 2)"
+          :to="'/works/' + works[(r - 1) * 2 + c - 1].slug"
         >
-          <WorkCard :work="data.docs[(r - 1) * 2 + c - 1]" />
+          <WorkCard :work="works[(r - 1) * 2 + c - 1]" />
         </NuxtLink>
       </div>
     </div>
@@ -95,7 +93,7 @@ watchEffect(() => console.log(data.value))
           "
         >
           <div class="card-info">
-            <h3>Study Reminder App{{ data.docs[0].title }}</h3>
+            <h3>Study Reminder App{{ works[0].title }}</h3>
             <div class="tags">
               <div class="tag">UX Case Study</div>
               <div class="tag">Research</div>

@@ -1,3 +1,11 @@
+<script setup lang="ts">
+// Temporarily loading all data into all pages. 
+// Will change to on-demand data fetching when SSG is fully implemented in Nuxt3. 
+const { data, error } = await useApi("works")
+if (error.value) console.error(error.value)
+provide(injectionKeys.works, data.value.docs)
+</script>
+
 <template>
   <div>
     <Head>

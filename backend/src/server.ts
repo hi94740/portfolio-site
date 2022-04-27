@@ -39,6 +39,7 @@ app.use("/proxy", (req, res) => {
     })
     .catch(() => res.send(""))
 })
+app.disable("etag")
 
 if (process.env.SSL_KEY && process.env.SSL_CERT)
   https
@@ -49,5 +50,5 @@ if (process.env.SSL_KEY && process.env.SSL_CERT)
       },
       app
     )
-    .listen(parseInt(process.env.PORT), "0.0.0.0")
-else app.listen(parseInt(process.env.PORT), "0.0.0.0", () => {})
+    .listen(parseInt(process.env.PORT || "80"), "0.0.0.0")
+else app.listen(parseInt(process.env.PORT || "80"), "0.0.0.0", () => {})

@@ -9,7 +9,7 @@
   "description": "Jiawei's portfolio site",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier ./ -c && exit || echo '\nPress enter to format ALL' && read && prettier ./ -w",
+    "format": "prettier . -c && exit || echo '\nPress enter to format ALL' && read && prettier . -w",
     "dev": "concurrently -n frontend,backend -c green,blue 'npm run dev -w frontend' 'npm run dev -w backend'",
     "start": "npm run start -w backend",
     "build": "npm run build -w components && npm run build -w backend",

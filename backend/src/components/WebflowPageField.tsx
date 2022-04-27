@@ -18,7 +18,7 @@ const webflowPageField: (name: string) => GroupField = name => ({
       admin: {
         components: {
           Field: ({ path }: { path: string }) => {
-            const { getData } = useForm<{ "webflow.url": string }>()
+            const { getData } = useForm()
             const { value, setValue } = useField<string>({ path })
             const sync = async () =>
               setValue(
@@ -26,11 +26,14 @@ const webflowPageField: (name: string) => GroupField = name => ({
                   btoa(
                     (
                       await (
-                        await fetch("/proxy?text=" + getData()["webflow.url"])
+                        await fetch(
+                          "/proxy?text=" +
+                            getData()[path.replace(/\.html$/, ".url")]
+                        )
                       ).text()
                     ).replace(
                       "</head>",
-                      "<style>a.w-webflow-badge{display: none !important;}</style></head>"
+                      "<script>document.querySelectorAll('link').forEach(l=>{const u=new URL(l.href);if(u.protocol==='http:'){u.protocol='https:';l.href=u.toString()}})</script><style>a.w-webflow-badge{display: none !important;}</style></head>"
                     )
                   )
               )

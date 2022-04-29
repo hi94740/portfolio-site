@@ -32,7 +32,8 @@
     "common",
     "frontend",
     "backend",
-    "components"
+    "components",
+    "workers"
   ],
   "devDependencies": {
     "concurrently": "^7.1.0",

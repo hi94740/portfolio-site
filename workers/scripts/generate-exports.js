@@ -1,3 +1,3 @@
 const generate = require("common/scripts/generate-exports")
 
-generate(["../src/components"], __dirname, "/index.vue")
+generate(["../routes"], __dirname)

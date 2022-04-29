@@ -14,9 +14,11 @@
     "generate:exports": "node scripts/generate-exports.js"
   },
   "dependencies": {
+    "dayjs": "^1.11.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "imagekit-media-library-widget": "^1.0.2",
+    "js-base64": "^3.7.2",
     "payload": "^0.15.7",
     "superagent": "^7.1.2",
     "veaury": "^1.0.5",

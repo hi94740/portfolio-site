@@ -2,6 +2,7 @@ import React from "react"
 import { GroupField } from "payload/dist/fields/config/types"
 import { useField } from "payload/components/forms"
 import useForm from "../utils/useForm"
+import { encode } from "js-base64"
 
 const webflowPageField: (name: string) => GroupField = name => ({
   name,
@@ -23,11 +24,11 @@ const webflowPageField: (name: string) => GroupField = name => ({
             const sync = async () =>
               setValue(
                 "data:text/html;base64," +
-                  btoa(
+                  encode(
                     (
                       await (
                         await fetch(
-                          "/proxy?text=" +
+                          "https://preview.shenjiaweb.com/proxy?url=" +
                             getData()[path.replace(/\.html$/, ".url")]
                         )
                       ).text()

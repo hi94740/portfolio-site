@@ -4,3 +4,30 @@
 .border-box-all * {
   box-sizing: border-box;
 }
+
+.deployment-section {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.deployment-status {
+  background-color: white;
+  border-radius: 50vw;
+  padding: 5px 10px;
+  margin-top: 5px;
+  border: none;
+  font-size: inherit;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deployment-status:active {
+  opacity: 0.5;
+}
+
+.deployment-status:disabled {
+  cursor: default;
+}

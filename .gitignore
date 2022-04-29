@@ -5,6 +5,7 @@ nuxt.d.ts
 dist
 dist-ssr
 build
+transpiled
 .env
 wrangler.toml
 *.local

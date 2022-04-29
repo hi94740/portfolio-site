@@ -21,3 +21,7 @@ PORT
 CORS_ORIGIN (comma separated origins, default to \*)
 SSL_KEY
 SSL_CERT
+
+## Cloudflare
+
+CLOUDFLARE_WORKERS_BASE_URL

@@ -4,6 +4,8 @@ import * as collections from "./collections"
 import Providers from "./components/Providers"
 import Deployment from "./components/Deployment"
 import BackendBuildTime from "./components/BackendBuildTime"
+import dotenv from "dotenv"
+dotenv.config()
 
 let serverURL = `${process.env.PROTOCOL}://${process.env.HOST}${
   process.env.PUBLIC_PORT ? ":" + process.env.PUBLIC_PORT : ""

@@ -18,7 +18,6 @@ const WorkCard = () => {
       "label[for='tags']+div .rs__multi-value__label"
     )
   ].map((e: HTMLDivElement) => e.innerText)
-  console.log(data)
 
   const [, reRender] = useReducer((c: number) => c + 1, 0)
   useEffect(() => {

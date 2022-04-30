@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier . -c && exit || echo '\nPress enter to format ALL' && read && prettier . -w",
     "dev": "concurrently -n frontend,backend -c green,blue 'npm run dev -w frontend' 'npm run dev -w backend'",
-    "start": "npm run start -w backend",
+    "start": "npm start -w backend",
     "build": "npm run build -w components && npm run build -w backend",
     "build:all": "npm run build -w components && concurrently -n frontend,backend -c green,blue 'npx nuxi build frontend' 'npm run build -w backend'",
     "push:heroku": "npm run build && heroku container:push web -a shenjiaweb && heroku container:release web -a shenjiaweb"

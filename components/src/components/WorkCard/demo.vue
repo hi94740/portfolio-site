@@ -6,7 +6,8 @@ import WorkCard from "./index.vue"
   <WorkCard
     :work="{
       title: 'Study Reminder App',
-      coverImageBackground: '/default-image.jpg'
+      coverImageBackground: '/default-image.jpg',
+      tags: ['UX Research', 'UI Design']
     }"
     :style="{ maxWidth: '700px' }"
   />

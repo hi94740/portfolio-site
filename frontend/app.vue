@@ -1,9 +1,14 @@
 <script setup lang="ts">
 // Temporarily loading all data into all pages.
 // Will change to on-demand data fetching when SSG is fully implemented in Nuxt3.
-const { data, error } = await useApi("works")
+const { data, error } = await useApi("lists", {
+  params: { "where[slug][equals]": "featured" }
+})
 if (error.value) console.error(error.value)
-provide(injectionKeys.works, data.value.docs)
+provide(
+  injectionKeys.works,
+  data.value.docs[0].works.map(w => w.work)
+)
 </script>
 
 <template>

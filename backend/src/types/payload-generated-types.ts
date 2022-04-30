@@ -8,15 +8,16 @@
 export interface Config {}
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "lists".
  */
-export interface User {
+export interface List {
   id: string
-  email?: string
-  resetPasswordToken?: string
-  resetPasswordExpiration?: string
-  loginAttempts?: number
-  lockUntil?: string
+  slug: string
+  label?: string
+  works?: {
+    work?: string | Work
+    id?: string
+  }[]
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -27,6 +28,7 @@ export interface Work {
   _status?: "draft" | "published"
   slug: string
   title?: string
+  tags?: (string | Tag)[]
   coverImageBackground?: string
   contentType: "none" | "webflow"
   webflow?: {
@@ -34,11 +36,34 @@ export interface Work {
     html?: string
   }
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: string
+  slug: string
+  label: string
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: string
+  email?: string
+  resetPasswordToken?: string
+  resetPasswordExpiration?: string
+  loginAttempts?: number
+  lockUntil?: string
+}
 
 interface PayloadGeneratedTypes {
   config: Config
-  users: User
+  lists: List
   works: Work
+  tags: Tag
+  users: User
 }
 
 export default PayloadGeneratedTypes

@@ -18,6 +18,11 @@ const props = defineProps<WorkCardProps>()
     />
     <div class="work-card-info">
       <h3>{{ props.work.title }}</h3>
+      <div class="tags">
+        <div class="tag" v-for="tag in props.work.tags">
+          {{ typeof tag === "string" ? tag : tag.label }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -47,10 +52,10 @@ img.bg {
   background: rgba(255, 255, 255, 0.8);
   -webkit-backdrop-filter: saturate(180%) blur(18px);
   backdrop-filter: saturate(180%) blur(18px);
-  height: 90px;
   width: 100%;
   border-radius: 0 0 20px 20px;
   padding: 20px;
+  padding-top: 15px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -60,6 +65,8 @@ img.bg {
 }
 .work-card-info > h3 {
   text-align: left;
+  font-weight: bold;
+  font-size: 1.5em;
 }
 .tags {
   display: flex;
@@ -71,5 +78,6 @@ img.bg {
   color: white;
   padding: 2px 4px;
   border-radius: 5px;
+  font-size: 0.95em;
 }
 </style>

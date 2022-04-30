@@ -63,55 +63,13 @@ const works = inject(injectionKeys.works)
     <div class="row-container" v-for="r in Math.ceil(works.length / 2)">
       <div class="row">
         <NuxtLink
-          v-for="c in 2 - (works.length % 2)"
+          v-for="c in r === Math.ceil(works.length / 2)
+            ? 2 - (works.length % 2)
+            : 2"
           :to="'/works/' + works[(r - 1) * 2 + c - 1].slug"
         >
           <WorkCard :work="works[(r - 1) * 2 + c - 1]" />
         </NuxtLink>
-      </div>
-    </div>
-    <div class="row-container">
-      <div class="row">
-        <div
-          class="card"
-          style="
-            background-image: url('https://ik.imagekit.io/shenjiaweb/portfolio/works/streaming_recommendation/cover.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1650258900773');
-          "
-        >
-          <div class="card-info">
-            <h3>Streaming Service Recommendation</h3>
-            <div class="tags">
-              <div class="tag">Work In Progress</div>
-              <div class="tag">Figma</div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="card"
-          style="
-            background-image: url('https://ik.imagekit.io/shenjiaweb/portfolio/works/study_reminder_app/cover?ik-sdk-version=javascript-1.4.3&updatedAt=1650258008225');
-          "
-        >
-          <div class="card-info">
-            <h3>Study Reminder App{{ works[0].title }}</h3>
-            <div class="tags">
-              <div class="tag">UX Case Study</div>
-              <div class="tag">Research</div>
-              <div class="tag">Prototyping</div>
-              <div class="tag">Adobe XD</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row-container">
-      <div class="row">
-        <div class="card">
-          <div class="card-info"></div>
-        </div>
-        <div class="card">
-          <div class="card-info"></div>
-        </div>
       </div>
     </div>
   </div>

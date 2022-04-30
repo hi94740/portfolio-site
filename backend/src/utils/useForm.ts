@@ -5,8 +5,9 @@ export default <T = {}>() => {
   return {
     ...form,
     getData: () =>
-      Object.fromEntries([
-        ...new FormData(form.formRef.current).entries()
-      ]) as unknown as T
+      ({
+        ...form.getData(),
+        ...Object.fromEntries([...new FormData(form.formRef.current).entries()])
+      } as unknown as T)
   }
 }

@@ -3,6 +3,7 @@ import imagekitField from "../components/ImageKitField"
 import webflowPageField from "../components/WebflowPageField"
 import WorkCard from "../components/WorkCard"
 import { Work } from "../types/payload-generated-types"
+import slugField from "../utils/slugField"
 
 const Examples: CollectionConfig = {
   slug: "works",
@@ -27,20 +28,16 @@ const Examples: CollectionConfig = {
         }
       }
     },
-    {
-      name: "slug",
-      type: "text",
-      required: true,
-      validate(val) {
-        return (
-          /[\w\d\-\_]+/g.test(val) ||
-          "Letters, numbers, slashes and dashes only!"
-        )
-      }
-    },
+    slugField,
     {
       name: "title",
       type: "text"
+    },
+    {
+      name: "tags",
+      type: "relationship",
+      relationTo: "tags",
+      hasMany: true
     },
     imagekitField("coverImageBackground"),
     {

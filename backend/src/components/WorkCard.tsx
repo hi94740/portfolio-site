@@ -13,6 +13,12 @@ const ReactWorkCard = applyVueInReact(
 const WorkCard = () => {
   const { formRef, getData } = useForm<Work>()
   const data = getData()
+  data.tags = [
+    ...document.querySelectorAll(
+      "label[for='tags']+div .rs__multi-value__label"
+    )
+  ].map((e: HTMLDivElement) => e.innerText)
+  console.log(data)
 
   const [, reRender] = useReducer((c: number) => c + 1, 0)
   useEffect(() => {
@@ -22,8 +28,10 @@ const WorkCard = () => {
 
   return (
     <div
-      className="border-box-all"
-      style={{ marginBottom: "10px" }}
+      className="frontend-componenet"
+      style={{
+        marginBottom: "10px"
+      }}
       onClick={reRender}
     >
       <ReactWorkCard work={data} />

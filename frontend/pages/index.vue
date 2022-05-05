@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useWindowSize } from "@vueuse/core"
+import { useTransition, useWindowSize } from "@vueuse/core"
 import { Ref } from "vue"
 import { WorkCard } from "components"
 const viewport = useWindowSize()
@@ -14,20 +14,30 @@ const computeDotCenter = (dotAmount: Ref<number>) =>
   computed(() => Math.ceil(dotAmount.value / 2))
 const hDotCenter = computeDotCenter(hDotAmount)
 const vDotCenter = computeDotCenter(vDotAmount)
-const purpleDots: Array<[number, number]> = [
-  [0, -2],
-  [0, -1],
+
+type Dot = [number, number]
+const purpleDots: Array<Dot> = [
+  // [0, -2],
+  // [0, -1],
+  // [0, 0],
+  // [0, 1],
+  // [0, 2],
+  // [1, 1],
+  // [2, 0],
+  // [-1, 1],
+  // [-2, 0]
   [0, 0],
-  [0, 1],
-  [0, 2],
   [1, 1],
-  [2, 0],
+  [2, 2],
   [-1, 1],
-  [-2, 0]
+  [-2, 2]
 ]
 const purpleDotsYoffset = ref(0)
 const animatedPurpleDots = computed(() =>
-  purpleDots.map(([x, y]) => [x, y + purpleDotsYoffset.value])
+  purpleDots.map(([x, y]) => [
+    x,
+    y + purpleDotsYoffset.value + Math.floor(vDotAmount.value / 2) - 4
+  ])
 )
 setInterval(
   () =>
@@ -36,11 +46,85 @@ setInterval(
       : (purpleDotsYoffset.value = 0),
   500
 )
-const testDot = (x: number, y: number) =>
-  animatedPurpleDots.value.some(
-    (dot: [number, number]) =>
+
+type DotWithColor = [number, number, string]
+const logoDots: Array<Array<DotWithColor>> = [
+  [[0, -2, "#9357F7"]],
+  [[-1, -3, "#9357F7"]],
+  [[-2, -3, "#9357F7"]],
+  [[-3, -2, "#9357F7"]],
+  [[-3, -1, "#9357F7"]],
+  [[-2, 0, "#9357F7"]],
+  [[-1, 0, "#9357F7"]],
+  [[0, 1, "linear-gradient(90deg, #9357F7 0%, #61C8ED 100%)"]],
+  [[0, 2, "linear-gradient(90deg, #768DF5 0%, #72F2CC 100%)"]],
+  [
+    [-1, 3, "#9357F7"],
+    [1, 3, "#72F2CC"]
+  ],
+  [
+    [-2, 3, "#9357F7"],
+    [2, 3, "#72F2CC"]
+  ],
+  [
+    [-3, 2, "#9357F7"],
+    [3, 2, "#72F2CC"]
+  ],
+  [[3, 1, "#72F2CC"]],
+  [[3, 0, "#72F2CC"]],
+  [[3, -1, "#72F2CC"]],
+  [[3, -2, "#72F2CC"]],
+  [[3, -3, "#72F2CC"]]
+]
+const disableLogoTransition = ref(false)
+const logoSliceStart = ref(0)
+const logoSliceEnd = ref(0)
+const animatedLogoSliceStart = useTransition(logoSliceStart, {
+  disabled: disableLogoTransition,
+  duration: 1000,
+  onFinished() {
+    disableLogoTransition.value = true
+    logoSliceStart.value = 0
+    logoSliceEnd.value = 0
+    setTimeout(() => {
+      disableLogoTransition.value = false
+      logoSliceEnd.value = logoDots.length
+    }, 500)
+  }
+})
+const animatedLogoSliceEnd = useTransition(logoSliceEnd, {
+  disabled: disableLogoTransition,
+  duration: 1500,
+  onFinished() {
+    setTimeout(() => (logoSliceStart.value = 9), 3000)
+  }
+})
+const animatedLogoDots = computed(() =>
+  logoDots
+    .map(d => d.map(([x, y, c]) => [x, y - 1, c]))
+    .slice(
+      animatedLogoSliceStart.value,
+      animatedLogoSliceEnd.value - animatedLogoSliceStart.value
+    )
+    .flat()
+)
+logoSliceEnd.value = logoDots.length
+
+const testDot = (x: number, y: number) => {
+  if (
+    animatedPurpleDots.value.some(
+      (dot: Dot) =>
+        dot[0] + hDotCenter.value === x && dot[1] + vDotCenter.value === y
+    )
+  )
+    return { background: "#9357F7" }
+  const logoDot = animatedLogoDots.value.find(
+    (dot: DotWithColor) =>
       dot[0] + hDotCenter.value === x && dot[1] + vDotCenter.value === y
   )
+  if (logoDot) return { background: logoDot[2] }
+  return {}
+}
 
 const works = inject(injectionKeys.works)
 </script>
@@ -54,7 +138,7 @@ const works = inject(injectionKeys.works)
             <div
               class="dot"
               v-for="d in hDotAmount"
-              :style="testDot(d, r) ? { background: '#9357F7' } : {}"
+              :style="testDot(d, r)"
             ></div>
           </div>
         </div>
@@ -96,6 +180,7 @@ const works = inject(injectionKeys.works)
   background-color: rgba(128, 128, 128, 0.04);
   width: 35px;
   height: 35px;
+  transition: 200ms;
 }
 .row-container {
   width: 100vw;

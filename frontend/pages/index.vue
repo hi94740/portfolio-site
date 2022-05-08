@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTransition, useWindowSize } from "@vueuse/core"
+import { useIntervalFn, useTransition, useWindowSize } from "@vueuse/core"
 import { Ref } from "vue"
 import { WorkCard } from "components"
 const viewport = useWindowSize()
@@ -39,7 +39,7 @@ const animatedPurpleDots = computed(() =>
     y + purpleDotsYoffset.value + Math.floor(vDotAmount.value / 2) - 4
   ])
 )
-setInterval(
+useIntervalFn(
   () =>
     purpleDotsYoffset.value === 0
       ? (purpleDotsYoffset.value = 1)

@@ -20,7 +20,7 @@
     "express": "^4.17.1",
     "imagekit-media-library-widget": "^1.0.2",
     "js-base64": "^3.7.2",
-    "payload": "^0.15.7",
+    "payload": "^0.16.4",
     "superagent": "^7.1.2",
     "veaury": "^1.0.5",
     "vue": "^3.2.33"

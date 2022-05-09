@@ -15,7 +15,7 @@ export interface List {
   slug: string
   label?: string
   works?: {
-    work?: string | Work
+    work: string | Work
     id?: string
   }[]
 }
@@ -30,11 +30,37 @@ export interface Work {
   title?: string
   tags?: (string | Tag)[]
   coverImageBackground?: string
-  contentType: "none" | "webflow"
-  webflow?: {
-    url: string
-    html?: string
-  }
+  contents?: (
+    | {
+        url: string
+        id?: string
+        blockName?: string
+        blockType: "webflow"
+      }
+    | {
+        url: string
+        id?: string
+        blockName?: string
+        blockType: "fullPageEmbed"
+      }
+    | {
+        websiteUrl?: string
+        sourceCodeUrl?: string
+        description?: {
+          [k: string]: unknown
+        }[]
+        cover?: string
+        id?: string
+        blockName?: string
+        blockType: "mobileWebsite"
+      }
+    | {
+        url: string
+        id?: string
+        blockName?: string
+        blockType: "youtube"
+      }
+  )[]
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

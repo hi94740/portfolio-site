@@ -127,6 +127,9 @@ const testDot = (x: number, y: number) => {
 }
 
 const works = inject(injectionKeys.works)
+
+const route = useRoute()
+watchEffect(() => console.log(route.hash))
 </script>
 
 <template>
@@ -144,6 +147,12 @@ const works = inject(injectionKeys.works)
         </div>
       </ClientOnly>
     </div>
+    <!-- <div class="nav-bar">
+      <div>
+        <NuxtLink to="#">Works</NuxtLink
+        ><NuxtLink to="#about">About Me</NuxtLink>
+      </div>
+    </div> -->
     <div class="row-container" v-for="r in Math.ceil(works.length / 2)">
       <div class="row">
         <NuxtLink
@@ -181,6 +190,22 @@ const works = inject(injectionKeys.works)
   width: 35px;
   height: 35px;
   transition: 200ms;
+}
+.nav-bar {
+  height: 5rem;
+  background: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  backdrop-filter: saturate(180%) blur(18px);
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  width: 100%;
+}
+.nav-bar > div {
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
+  display: flex;
 }
 .row-container {
   width: 100vw;

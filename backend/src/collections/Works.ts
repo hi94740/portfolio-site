@@ -1,11 +1,9 @@
 import { CollectionConfig } from "payload/types"
 import imagekitField from "../components/ImageKitField"
-import webflowPageField from "../components/WebflowPageField"
 import WorkCard from "../components/WorkCard"
-import { Work } from "../types/payload-generated-types"
 import slugField from "../utils/slugField"
 
-const Examples: CollectionConfig = {
+const Works: CollectionConfig = {
   slug: "works",
   access: {
     read: () => true
@@ -41,29 +39,60 @@ const Examples: CollectionConfig = {
     },
     imagekitField("coverImageBackground"),
     {
-      name: "contentType",
-      type: "select",
-      required: true,
-      options: [
+      name: "contents",
+      type: "blocks",
+      blocks: [
         {
-          label: "None",
-          value: "none"
+          slug: "webflow",
+          fields: [
+            {
+              name: "url",
+              type: "text",
+              required: true
+            }
+          ]
         },
         {
-          label: "Webflow Page",
-          value: "webflow"
+          slug: "fullPageEmbed",
+          fields: [
+            {
+              name: "url",
+              type: "text",
+              required: true
+            }
+          ]
+        },
+        {
+          slug: "mobileWebsite",
+          fields: [
+            {
+              name: "websiteUrl",
+              type: "text"
+            },
+            {
+              name: "sourceCodeUrl",
+              type: "text"
+            },
+            {
+              name: "description",
+              type: "richText"
+            },
+            imagekitField("cover")
+          ]
+        },
+        {
+          slug: "youtube",
+          fields: [
+            {
+              name: "url",
+              type: "text",
+              required: true
+            }
+          ]
         }
-      ],
-      defaultValue: "none"
-    },
-    {
-      ...webflowPageField("webflow"),
-      label: "Webflow Page",
-      admin: {
-        condition: (data: Work) => data.contentType === "webflow"
-      }
+      ]
     }
   ]
 }
 
-export default Examples
+export default Works

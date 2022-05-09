@@ -12,8 +12,9 @@ const imagekitField: (name: string) => TextField = name => ({
       Field: (props: { label: string; path: string }) => {
         const { value, setValue } = useField<string>({ path: props.path })
         // console.log(props)
-        const containerid = "IKcontainer-" + props.path
-        const buttonid = "IKbutton-" + props.path
+        const id = props.path.replaceAll(".", "-")
+        const containerid = "IKcontainer-" + id
+        const buttonid = "IKbutton-" + id
         useEffect(() => {
           import("imagekit-media-library-widget").then(
             async ({ default: ik }: { default: IKMediaLibraryWidget }) => {

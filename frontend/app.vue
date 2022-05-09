@@ -1,13 +1,34 @@
 <script setup lang="ts">
 // Temporarily loading all data into all pages.
 // Will change to on-demand data fetching when SSG is fully implemented in Nuxt3.
+import { Work } from "backend/src/types/payload-generated-types"
 const { data, error } = await useApi("lists", {
   params: { "where[slug][equals]": "featured" }
 })
 if (error.value) console.error(error.value)
+const works = data.value.docs[0].works.map(w => w.work)
+provide(injectionKeys.works, works)
 provide(
-  injectionKeys.works,
-  data.value.docs[0].works.map(w => w.work)
+  injectionKeys.webflowPages,
+  new Map(
+    await Promise.all(
+      works
+        .map((w: Work) => w.contents)
+        .flat()
+        .filter(c => c.blockType === "webflow")
+        .map(
+          async (c: any) =>
+            [
+              c.url,
+              (
+                await useFetch<string>(
+                  "https://preview.shenjiaweb.com/proxy?url=" + c.url
+                )
+              ).data.value
+            ] as const
+        )
+    )
+  )
 )
 </script>
 
@@ -44,10 +65,16 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-button {
+button,
+.button {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   padding: 10px 20px;
+  border-radius: 50vw;
+  border: none;
+  color: white;
+  font-size: 1em;
+  text-decoration: none;
 }
 
 a {

@@ -9,6 +9,7 @@ const webflowPages = inject(injectionKeys.webflowPages)
 
 <template>
   <div>
+    <Title>{{ work?.title || "" }} by Shen Jiawei</Title>
     <NuxtLink to="/"><button class="home">Home</button></NuxtLink>
     <template v-if="work" v-for="content in work.contents">
       <iframe

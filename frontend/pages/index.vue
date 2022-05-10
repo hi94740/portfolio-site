@@ -134,6 +134,7 @@ watchEffect(() => console.log(route.hash))
 
 <template>
   <div>
+    <Title>Shen Jiawei</Title>
     <div class="dot-screen-container">
       <ClientOnly>
         <div class="dot-screen">

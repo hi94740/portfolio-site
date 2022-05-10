@@ -9,6 +9,6 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    public: { apiBase: "" }
+    public: { apiBase: "", workerBase: "" }
   }
 })

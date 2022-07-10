@@ -154,7 +154,7 @@ watchEffect(() => console.log(route.hash))
         ><NuxtLink to="#about">About Me</NuxtLink>
       </div>
     </div> -->
-    <div class="row-container" v-for="r in Math.ceil(works.length / 2)">
+    <!-- <div class="row-container" v-for="r in Math.ceil(works.length / 2)">
       <div class="row">
         <NuxtLink
           v-for="c in r === Math.ceil(works.length / 2)
@@ -163,6 +163,13 @@ watchEffect(() => console.log(route.hash))
           :to="'/works/' + works[(r - 1) * 2 + c - 1].slug"
         >
           <WorkCard :work="works[(r - 1) * 2 + c - 1]" />
+        </NuxtLink>
+      </div>
+    </div> -->
+    <div class="works-list-container">
+      <div class="works-list">
+        <NuxtLink v-for="work in works" :to="'/works/' + work.slug">
+          <WorkCard :work="work" />
         </NuxtLink>
       </div>
     </div>
@@ -222,6 +229,20 @@ watchEffect(() => console.log(route.hash))
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
+.works-list-container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+.works-list {
+  width: 100%;
+  max-width: 1400px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
 .card {
   grid-column: 1 span;
   height: 400px;
@@ -260,5 +281,11 @@ watchEffect(() => console.log(route.hash))
   color: white;
   padding: 2px 4px;
   border-radius: 5px;
+}
+@media (max-width: 900px) {
+  .works-list {
+    grid-template-columns: repeat(1, 1fr);
+    max-width: 680px;
+  }
 }
 </style>
